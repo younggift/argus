@@ -1,0 +1,137 @@
+argus.py
+
+
+We carry our laptop computer to different places, such as workshop,
+
+office, home, etc., where we connect it with different monitors. We
+
+click the mouse to setup the resolution, position, ratation for every
+
+monitor repeatly.
+
+
+
+With Arugus, the untility for saving your current setting of
+
+display/monitor, you can collect automaticlly for all the
+
+display/monitor connected to your computer into a shell code, which
+
+later you can run to restore the setting.
+
+
+
+What you need is just remember the name of the shell code, which
+
+brings you all the information of your favorate working environment as
+
+soon as you run it.
+
+
+
+An simple example is as the follow.
+
+
+
+I have a Dell display in 23 inch, which can rotate vertically for
+
+programmer easilly browsing a large scale of code with out pagedown
+
+or pageup, as well as rotate horizantally for watching movie without
+
+black edge.
+
+
+
+I turn the monitor left, before setting up the layout (position and
+
+mode and rotation) for it with System->Monitors in Ubuntu. Then, I run
+
+
+
+: ~ $ arugus.py -s programming.sh
+
+
+
+to cteate a file named programming.sh excutable.
+
+
+
+: ~ $ cat programming.sh
+
+: #!/bin/bash
+
+: xrandr --output VGA1 --pos 0x0 --mode 1920x1080 --rotate left
+
+: xrandr --output LVDS1 --pos 0x1920 --mode 1280x800 --rotate normal
+
+
+
+I turn the monitor horizatally, then also set up the current layout
+
+manually with GUI System->Monitors. I save the current setting as movie.sh.
+
+
+
+
+
+: ~ $ arugus.py -s movie.sh
+
+: ~ $ cat movie.sh
+
+: #!/bin/bash
+
+: xrandr --output VGA1 --pos 0x0 --mode 1920x1080 --rotate normal
+
+: xrandr --output LVDS1 --pos 248x1080 --mode 1280x800 --rotate normal
+
+
+
+Once completed the steps above, we can switch the working condition
+
+with running the corresponding shell code. 
+
+
+
+When I watch movie,
+
+
+
+: ~$ ./movie.sh
+
+
+
+when I input code,
+
+
+
+: ~$ ./programming.sh
+
+
+
+In my office, in my classroom with projector, or in my workshop, I can
+
+switch my laptop to the suitable state.
+
+
+
+We can return whatever we have been, if we remember. Yesterday once
+
+more.
+
+
+
+Dependency:
+
+
+
+xrandr, you usually have.
+
+
+
+python, you usually have.
+
+
+
+bash, you usually have.
+
