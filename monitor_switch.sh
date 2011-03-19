@@ -15,13 +15,16 @@
 # based on chips617's work at [http://ubuntuforums.org/showthread.php?t=1045417].
 # based on Raphael Wimmer's work at [http://my.opera.com/raphman/blog/show.dml/302528]
 
-# bugs knonw:
 # History:
 # 2011-3-19 bug fixed: we don't depend on xdotool any more, because we can't find the function by it to manipulate the maximized window.
 # 1. If the left-top conner of the active window is out of your monitors, we cannot determin which monitor is on, therefore we suppose it is on monitor B.
 # 2. if one of the monitor is rotated left, the shortcut will be disabled.
 # 2011-1-31 The monitors can be at any position, not only left and right.
 # 2007-11 the original chips617's work
+
+# bugs knonw:
+# empty now.
+
 
 # resolution and position of monitors
 count=0
