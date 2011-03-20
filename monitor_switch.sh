@@ -16,14 +16,22 @@
 # based on Raphael Wimmer's work at [http://my.opera.com/raphman/blog/show.dml/302528]
 
 # History:
-# 2011-3-19 bug fixed: we don't depend on xdotool any more, because we can't find the function by it to manipulate the maximized window.
-# 1. If the left-top conner of the active window is out of your monitors, we cannot determin which monitor is on, therefore we suppose it is on monitor B.
-# 2. if one of the monitor is rotated left, the shortcut will be disabled.
-# 2011-1-31 The monitors can be at any position, not only left and right.
+# 2011-3-20 bug fixed:
+#   The buffer string in output of xprop disturbes getting activewindow.
+# 2011-3-19 bug fixed: we don't depend on xdotool any more, because we
+# can't find the function by it to manipulate the maximized window.
+#   1. If the left-top conner of the active window is out of your
+#   monitors, we cannot determin which monitor is on, therefore we
+#   suppose it is on monitor B.
+#   2. if one of the monitor is rotated left, the shortcut will be
+#   disabled.
+# 2011-1-31 The monitors can be at any position, not only left and
+# right.
 # 2007-11 the original chips617's work
 
-# bugs knonw:
-# empty now.
+# bugs known:
+# - Google chrome must be set "Use system title bar and borders" with
+#   right clicking on the title, otherwise it cannot be moved.
 
 
 # resolution and position of monitors
@@ -44,13 +52,13 @@ x_B_monitor=${keys[7]}
 y_B_monitor=${keys[8]}
 
 # get active window
-# window=`xdotool getactivewindow`
-activeWinLine=$(xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)")
+#window=`xdotool getactivewindow`
+activeWinLine="$(xprop -root _NET_ACTIVE_WINDOW)"
 window="${activeWinLine:40}"
 
 # window title bar height
 # h_tbar=29
-xWinDecorLine=$(xprop -id $window | grep "_NET_FRAME_EXTENTS(CARDINAL)")
+xWinDecorLine=$(xprop -id ${window} _NET_FRAME_EXTENTS)
 h_tbar=${xWinDecorLine:37 :2}
 
 # get active window size and position
@@ -83,7 +91,6 @@ fi
 new_x=$(($x-$x_source_monitor+$x_target_monitor))
 new_y=$(($y-$y_source_monitor+$y_target_monitor-$h_tbar))
 
-
 # ... and the width or the height up to the edge of the target monitor
 if (($w > $w_target_monitor))
 then
@@ -97,7 +104,7 @@ fi
 
 # move the window to another monitor
 # if maximized store info and de-maximize
-winState=$(xprop -id $window | grep "_NET_WM_STATE(ATOM)"  )  
+winState=$(xprop -id ${window} _NET_WM_STATE)  
 
 if [[ `echo ${winState} | grep "_NET_WM_STATE_MAXIMIZED_HORZ"` != ""  ]]
 then 
