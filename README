@@ -1,4 +1,13 @@
-argus.py
+argus
+
+1. "argus.py" is an utility for switching easily the resolution,
+position and ratation for all the screens connected to the computer.
+
+2. "monitor_switch.sh" is an utility to move the active window between
+daul head monitors. It can be invoked with a keyboard shortcut after
+binding the shell script file to it.
+
+The introduction of argus.py is as the follows.
 
 
 We carry our laptop computer to different places, such as workshop,
