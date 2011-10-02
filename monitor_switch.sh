@@ -16,6 +16,8 @@
 # based on Raphael Wimmer's work at [http://my.opera.com/raphman/blog/show.dml/302528]
 
 # History:
+# 2011-10-2 bug fixed:
+# Skipping the error message from xrandr. Thanks Peter Ploß reported this bug.
 # 2011-3-20 bug fixed:
 #   The buffer string in output of xprop disturbes getting activewindow.
 # 2011-3-19 bug fixed: we don't depend on xdotool any more, because we
@@ -40,7 +42,7 @@ while read line
 do
    keys[$((++count))]="${line}"
 done <<EOF
-$( xrandr -q | grep  " connected" | awk '{print $3}' | awk -F'[x+]' '{printf("%s\n%s\n%s\n%s\n",$1, $2, $3, $4)}' )
+$( xrandr -q 2> /dev/null | grep  " connected" | awk '{print $3}' | awk -F'[x+]' '{printf("%s\n%s\n%s\n%s\n",$1, $2, $3, $4)}' )
 EOF
 w_A_monitor=${keys[1]}
 h_A_monitor=${keys[2]}
