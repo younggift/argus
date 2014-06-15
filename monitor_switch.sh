@@ -42,7 +42,7 @@ while read line
 do
    keys[$((++count))]="${line}"
 done <<EOF
-$( xrandr -q 2> /dev/null | grep  " connected" | awk '{print $3}' | awk -F'[x+]' '{printf("%s\n%s\n%s\n%s\n",$1, $2, $3, $4)}' )
+$( xrandr -q 2> /dev/null | grep  " connected" | sed 's/primary //g' | awk '{print $3}' | awk -F'[x+]' '{printf("%s\n%s\n%s\n%s\n",$1, $2, $3, $4)}' )
 EOF
 w_A_monitor=${keys[1]}
 h_A_monitor=${keys[2]}
